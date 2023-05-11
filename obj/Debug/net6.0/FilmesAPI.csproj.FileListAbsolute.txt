@@ -112,3 +112,5 @@ C:\Users\3973\Documents\ws-2023\Alura\API\alura-filmes-api\bin\Debug\net6.0\Azur
 C:\Users\3973\Documents\ws-2023\Alura\API\alura-filmes-api\bin\Debug\net6.0\Azure.Core.dll
 C:\Users\3973\Documents\ws-2023\Alura\API\alura-filmes-api\bin\Debug\net6.0\Microsoft.Bcl.AsyncInterfaces.dll
 C:\Users\3973\Documents\ws-2023\Alura\API\alura-filmes-api\bin\Debug\net6.0\System.Memory.Data.dll
+C:\Users\3973\Documents\ws-2023\Alura\API\alura-filmes-api\bin\Debug\net6.0\FilmesAPI.xml
+C:\Users\3973\Documents\ws-2023\Alura\API\alura-filmes-api\obj\Debug\net6.0\FilmesAPI.xml
