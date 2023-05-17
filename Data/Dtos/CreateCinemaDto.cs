@@ -6,5 +6,7 @@ namespace FilmesAPI.Data.Dtos
     {
         [Required(ErrorMessage = "O campo Nome é obrigatório")]
         public string Nome { get; set; }
+        [Required]
+        public int EnderecoId { get; set; }
     }
 }
