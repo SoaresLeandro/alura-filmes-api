@@ -39,7 +39,6 @@ namespace FilmesAPI.Controllers
             Cinema cinema = _context.Cinemas.FirstOrDefault(cinema => cinema.Id == id);
 
             ReadCinemaDto cinemaDto = _mapper.Map<ReadCinemaDto>(cinema);
-            cinemaDto.DataDaConsulta = DateTime.Now;
 
             return cinema is null ? NotFound() : Ok(cinemaDto);
         }

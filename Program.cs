@@ -17,7 +17,10 @@ builder.Services.AddSwaggerGen(c => {
     c.IncludeXmlComments(xmlPath);
 });
 
-builder.Services.AddDbContext<FilmeContext>(opts => opts.UseMySQL(builder.Configuration.GetConnectionString("FilmeConnection")));
+builder.Services.AddDbContext<FilmeContext>(opts => 
+    opts.UseLazyLoadingProxies()
+        .UseMySQL(builder.Configuration.GetConnectionString("FilmeConnection")));
+
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 var app = builder.Build();

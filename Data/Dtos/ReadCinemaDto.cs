@@ -4,7 +4,7 @@
     {
         public int Id { get; set; }
         public string Nome { get; set; }
-        public DateTime DataDaConsulta { get; set; }
-        public ReadEnderecoDto ReadEnderecoDto { get; set; }
+        public DateTime DataDaConsulta { get => DateTime.Now; }
+        public virtual ReadEnderecoDto Endereco { get; set; }
     }
 }
