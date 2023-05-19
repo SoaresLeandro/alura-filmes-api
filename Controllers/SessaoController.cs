@@ -6,8 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace FilmesAPI.Controllers
 {
-    [ApiController]
-    [Route("{Controller}")]
+    [ApiController, Route("{Controller}")]
     public class SessaoController : ControllerBase
     {
         private FilmeContext _context;

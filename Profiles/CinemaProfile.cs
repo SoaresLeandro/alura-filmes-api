@@ -10,7 +10,7 @@ namespace FilmesAPI.Profiles
         {
             CreateMap<Cinema, CreateCinemaDto>().ReverseMap();
             CreateMap<Cinema, ReadCinemaDto>()
-                .ForMember(cinemaDto => cinemaDto.ReadEnderecoDto, 
+                .ForMember(cinemaDto => cinemaDto.Endereco, 
                            opt => opt.MapFrom(cinema => cinema.Endereco))
                 .ReverseMap();
             CreateMap<Cinema, UpdateCinemaDto>().ReverseMap();
