@@ -9,8 +9,8 @@ namespace FilmesAPI.Profiles
         public EnderecoProfile()
         {
             CreateMap<Endereco, CreateEnderecoDto>().ReverseMap();
-            CreateMap<Endereco, ReadEnderecoDto>().ReverseMap();
             CreateMap<Endereco, UpdateEnderecoDto>().ReverseMap();
+            CreateMap<Endereco, ReadEnderecoDto>().ReverseMap();
         }
     }
 }

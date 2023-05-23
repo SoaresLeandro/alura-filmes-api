@@ -39,7 +39,7 @@ namespace FilmesAPI.Controllers
         [HttpGet]
         public IActionResult RecuperarFilmes([FromQuery] int skip = 0, [FromQuery] int take = 2)
         {
-            return Ok(_context.Filmes.Skip(skip).Take(take));
+            return Ok(_mapper.Map<List<ReadFilmeDto>>(_context.Filmes.Skip(skip).Take(take).ToList()));
         }
 
         [HttpGet("{id}")]

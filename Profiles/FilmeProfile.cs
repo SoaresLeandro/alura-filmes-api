@@ -10,7 +10,10 @@ namespace FilmesAPI.Profiles
         {
             CreateMap<Filme, CreateFilmeDto>().ReverseMap();
             CreateMap<Filme, UpdateFilmeDto>().ReverseMap();
-            CreateMap<Filme, ReadFilmeDto>().ReverseMap();
+            CreateMap<Filme, ReadFilmeDto>()
+                .ForMember(filmeDto => filmeDto.Sessoes, 
+                    opt => opt.MapFrom(filme => filme.Sessoes))
+                .ReverseMap();
         }
     }
 }
