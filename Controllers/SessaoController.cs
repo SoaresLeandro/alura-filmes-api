@@ -25,7 +25,7 @@ namespace FilmesAPI.Controllers
             _context.Sessoes.Add(sessao);
             _context.SaveChanges();
 
-            return CreatedAtAction(nameof(RecuperarSessaoPorId), new { id = sessao.Id }, sessao);
+            return CreatedAtAction(nameof(RecuperarSessao), new { CinemaId = sessao.CinemaId, FilmeId = sessao.FilmeId }, sessao);
         }
 
         [HttpGet]
@@ -34,10 +34,10 @@ namespace FilmesAPI.Controllers
             return Ok(_mapper.Map<List<ReadSessaoDto>>(_context.Sessoes.ToList()));
         }
 
-        [HttpGet("{id}")]
-        public IActionResult RecuperarSessaoPorId(int id) 
+        [HttpGet("{cinemaId}/{filmeId}")]
+        public IActionResult RecuperarSessao(int cinemaId, int filmeId) 
         {
-            Sessao sessao = _context.Sessoes.FirstOrDefault(sessao => sessao.Id == id);
+            Sessao sessao = _context.Sessoes.FirstOrDefault(sessao => sessao.CinemaId == cinemaId && sessao.FilmeId == filmeId);
 
             return sessao is null ? NotFound() : Ok(_mapper.Map<ReadSessaoDto>(sessao));
         }
