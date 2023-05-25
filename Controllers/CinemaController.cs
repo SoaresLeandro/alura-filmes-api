@@ -24,6 +24,7 @@ namespace FilmesAPI.Controllers
             Cinema cinema = _mapper.Map<Cinema>(cinemaDto);
             _context.Cinemas.Add(cinema);
             _context.SaveChanges();
+
             return CreatedAtAction(nameof(RecuperarCinemaPorId), new { id = cinema.Id }, cinema);
         }
 
@@ -52,6 +53,7 @@ namespace FilmesAPI.Controllers
 
             _mapper.Map(cinemaDto, cinema);
             _context.SaveChanges();
+
             return NoContent();
         }
 
@@ -64,6 +66,7 @@ namespace FilmesAPI.Controllers
 
             _context.Cinemas.Remove(cinema);
             _context.SaveChanges();
+
             return NoContent();
         }
     }
