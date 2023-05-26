@@ -37,9 +37,14 @@ namespace FilmesAPI.Controllers
         }
 
         [HttpGet]
-        public IActionResult RecuperarFilmes([FromQuery] int skip = 0, [FromQuery] int take = 2)
+        public IActionResult RecuperarFilmes([FromQuery] int skip = 0, [FromQuery] int take = 2, [FromQuery] string? nomeDoCinema = null)
         {
-            return Ok(_mapper.Map<List<ReadFilmeDto>>(_context.Filmes.Skip(skip).Take(take).ToList()));
+            return nomeDoCinema is null ? Ok(_mapper.Map<List<ReadFilmeDto>>(_context.Filmes.Skip(skip).Take(take).ToList())) :
+                Ok(_mapper.Map<List<ReadFilmeDto>>(_context.Filmes
+                .Skip(skip)
+                .Take(2)
+                .Where(filme => filme.Sessoes.Any(sessao => sessao.Cinema.Nome == nomeDoCinema))
+                .ToList()));
         }
 
         [HttpGet("{id}")]

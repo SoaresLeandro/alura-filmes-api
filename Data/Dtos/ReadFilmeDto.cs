@@ -1,14 +1,7 @@
-﻿using FilmesAPI.Models;
-using System.ComponentModel.DataAnnotations;
-
-namespace FilmesAPI.Data.Dtos
+﻿namespace FilmesAPI.Data.Dtos
 {
     public class ReadFilmeDto
-    {
-        [Key]
-        [Required]
-        public int Id { get; set; }
-        
+    {        
         public string Titulo { get; set; }
         
         public string Genero { get; set; }
