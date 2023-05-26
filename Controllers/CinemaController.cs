@@ -3,6 +3,7 @@ using FilmesAPI.Data;
 using FilmesAPI.Data.Dtos;
 using FilmesAPI.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace FilmesAPI.Controllers
 {
@@ -29,9 +30,16 @@ namespace FilmesAPI.Controllers
         }
 
         [HttpGet]
-        public IActionResult RecuperarFilmes([FromQuery] int skip = 0, [FromQuery] int take = 2)
+        public IActionResult RecuperarCinemas([FromQuery] int skip = 0, [FromQuery] int take = 2, [FromQuery] int? enderecoId = null)
         {
-            return Ok(_mapper.Map<List<ReadCinemaDto>>(_context.Cinemas.ToList().Skip(skip).Take(take)));
+            return enderecoId is null ?
+                Ok(_mapper.Map<List<ReadCinemaDto>>(_context.Cinemas.ToList().Skip(skip).Take(take))) :
+                Ok(_mapper.Map<List<ReadCinemaDto>>(_context.Cinemas
+                    .FromSqlRaw($"SELECT Id, Nome, EnderecoId from cinemas where EnderecoId = {enderecoId}")
+                    .ToList()
+                    .Skip(skip)
+                    .Take(take)));
+
         }
 
         [HttpGet("{id}")]
