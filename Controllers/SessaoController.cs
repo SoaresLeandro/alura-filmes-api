@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using FilmesAPI.Data;
+﻿using FilmesAPI.Data.Daos;
 using FilmesAPI.Data.Dtos;
 using FilmesAPI.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -9,21 +8,17 @@ namespace FilmesAPI.Controllers
     [ApiController, Route("{Controller}")]
     public class SessaoController : ControllerBase
     {
-        private FilmeContext _context;
-        private IMapper _mapper;
+        private SessaoDao _sessaoDao;
 
-        public SessaoController(FilmeContext context, IMapper mapper)
+        public SessaoController(SessaoDao sessaoDao)
         {
-            _context = context;
-            _mapper = mapper;
+            _sessaoDao = sessaoDao;
         }
 
         [HttpPost]
         public IActionResult CadastrarSessao([FromBody] CreateSessaoDto sessaoDto)
         {
-            Sessao sessao = _mapper.Map<Sessao>(sessaoDto);
-            _context.Sessoes.Add(sessao);
-            _context.SaveChanges();
+            Sessao sessao = _sessaoDao.AdicionarSessao(sessaoDto);
 
             return CreatedAtAction(nameof(RecuperarSessao), new { CinemaId = sessao.CinemaId, FilmeId = sessao.FilmeId }, sessao);
         }
@@ -31,15 +26,15 @@ namespace FilmesAPI.Controllers
         [HttpGet]
         public IActionResult RecuperarSessoes()
         {
-            return Ok(_mapper.Map<List<ReadSessaoDto>>(_context.Sessoes.ToList()));
+            return Ok(_sessaoDao.ObterSessoesDto());
         }
 
         [HttpGet("{cinemaId}/{filmeId}")]
         public IActionResult RecuperarSessao(int cinemaId, int filmeId) 
         {
-            Sessao sessao = _context.Sessoes.FirstOrDefault(sessao => sessao.CinemaId == cinemaId && sessao.FilmeId == filmeId);
+            ReadSessaoDto sessao = _sessaoDao.RecuperarSessao(cinemaId, filmeId);
 
-            return sessao is null ? NotFound() : Ok(_mapper.Map<ReadSessaoDto>(sessao));
+            return sessao is null ? NotFound() : Ok(sessao);
         }
     }
 }

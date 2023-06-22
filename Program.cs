@@ -1,4 +1,5 @@
 using FilmesAPI.Data;
+using FilmesAPI.Data.Daos;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using System.Reflection;
@@ -20,6 +21,11 @@ builder.Services.AddSwaggerGen(c => {
 builder.Services.AddDbContext<FilmeContext>(opts => 
     opts.UseLazyLoadingProxies()
         .UseMySQL(builder.Configuration.GetConnectionString("FilmeConnection")));
+
+builder.Services.AddScoped<FilmeDao>();
+builder.Services.AddScoped<CinemaDao>();
+builder.Services.AddScoped<EnderecoDao>();
+builder.Services.AddScoped<SessaoDao>();
 
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
