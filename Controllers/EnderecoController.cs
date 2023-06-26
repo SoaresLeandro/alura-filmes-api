@@ -9,9 +9,9 @@ namespace FilmesAPI.Controllers
     [Route("[Controller]")]
     public class EnderecoController : ControllerBase
     {
-        private EnderecoDao _enderecoDao;
+        private IEnderecoDao _enderecoDao;
 
-        public EnderecoController(EnderecoDao enderecoDao)
+        public EnderecoController(IEnderecoDao enderecoDao)
         {
             _enderecoDao = enderecoDao;
         }

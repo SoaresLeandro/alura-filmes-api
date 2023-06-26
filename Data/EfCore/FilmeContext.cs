@@ -1,7 +1,7 @@
 ﻿using FilmesAPI.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace FilmesAPI.Data
+namespace FilmesAPI.Data.EfCore
 {
     public class FilmeContext : DbContext
     {

@@ -1,21 +1,22 @@
 ﻿using AutoMapper;
+using FilmesAPI.Data.Daos;
 using FilmesAPI.Data.Dtos;
 using FilmesAPI.Models;
 
-namespace FilmesAPI.Data.Daos
+namespace FilmesAPI.Data.EfCore
 {
-    public class FilmeDao
+    public class FilmeDaoComEfCore : IFilmeDao
     {
         private FilmeContext _context;
         private IMapper _mapper;
 
-        public FilmeDao(FilmeContext context, IMapper mapper)
+        public FilmeDaoComEfCore(FilmeContext context, IMapper mapper)
         {
             _context = context;
             _mapper = mapper;
         }
 
-        public Filme ObterFilmePorId(int id) => 
+        public Filme ObterFilmePorId(int id) =>
             _context.Filmes.FirstOrDefault(filme => filme.Id == id);
 
         public ReadFilmeDto ObterFilmeDtoPorId(int id) =>

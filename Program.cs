@@ -1,5 +1,5 @@
-using FilmesAPI.Data;
 using FilmesAPI.Data.Daos;
+using FilmesAPI.Data.EfCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using System.Reflection;
@@ -22,10 +22,10 @@ builder.Services.AddDbContext<FilmeContext>(opts =>
     opts.UseLazyLoadingProxies()
         .UseMySQL(builder.Configuration.GetConnectionString("FilmeConnection")));
 
-builder.Services.AddScoped<FilmeDao>();
-builder.Services.AddScoped<CinemaDao>();
-builder.Services.AddScoped<EnderecoDao>();
-builder.Services.AddScoped<SessaoDao>();
+builder.Services.AddTransient<ICinemaDao, CinemaDaoComEfCore>();
+builder.Services.AddTransient<IEnderecoDao, EnderecoDaoComEfCore>();
+builder.Services.AddTransient<IFilmeDao, FilmeDaoComEfCore>();
+builder.Services.AddTransient<ISessaoDao, SessaoDaoComEfCore>();
 
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 

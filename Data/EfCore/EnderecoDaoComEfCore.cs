@@ -1,15 +1,16 @@
 ﻿using AutoMapper;
+using FilmesAPI.Data.Daos;
 using FilmesAPI.Data.Dtos;
 using FilmesAPI.Models;
 
-namespace FilmesAPI.Data.Daos
+namespace FilmesAPI.Data.EfCore
 {
-    public class EnderecoDao
+    public class EnderecoDaoComEfCore : IEnderecoDao
     {
         private FilmeContext _context;
         private IMapper _mapper;
 
-        public EnderecoDao(FilmeContext context, IMapper mapper)
+        public EnderecoDaoComEfCore(FilmeContext context, IMapper mapper)
         {
             _context = context;
             _mapper = mapper;

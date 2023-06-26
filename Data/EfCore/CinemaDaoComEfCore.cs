@@ -1,15 +1,16 @@
 ﻿using AutoMapper;
+using FilmesAPI.Data.Daos;
 using FilmesAPI.Data.Dtos;
 using FilmesAPI.Models;
 
-namespace FilmesAPI.Data.Daos
+namespace FilmesAPI.Data.EfCore
 {
-    public class CinemaDao
+    public class CinemaDaoComEfCore : ICinemaDao
     {
         private FilmeContext _context;
         private IMapper _mapper;
 
-        public CinemaDao(FilmeContext context, IMapper mapper)
+        public CinemaDaoComEfCore(FilmeContext context, IMapper mapper)
         {
             _context = context;
             _mapper = mapper;
@@ -18,7 +19,7 @@ namespace FilmesAPI.Data.Daos
         public ReadCinemaDto ObterCinemaDtoPorId(int id) =>
             _mapper.Map<ReadCinemaDto>(_context.Cinemas.FirstOrDefault(cinema => cinema.Id == id));
 
-        public Cinema ObterCinemaPorId(int id) => 
+        public Cinema ObterCinemaPorId(int id) =>
             _context.Cinemas.FirstOrDefault(cinema => cinema.Id == id);
 
         public IEnumerable<ReadCinemaDto> ObterCinemasDto(int skip = 0, int take = 0, int? enderecoId = 0)
@@ -29,7 +30,7 @@ namespace FilmesAPI.Data.Daos
                 _mapper.Map<IEnumerable<ReadCinemaDto>>(_context.Cinemas.Skip(skip).Take(take).ToList());
         }
 
-        public IEnumerable<Cinema> ObterCinemas() => 
+        public IEnumerable<Cinema> ObterCinemas() =>
             _context.Cinemas.ToList();
 
         public Cinema AdicionarCinema(CreateCinemaDto cinemaDto)

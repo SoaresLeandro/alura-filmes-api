@@ -9,9 +9,9 @@ namespace FilmesAPI.Controllers
     [Route("[controller]")]
     public class FilmeController : ControllerBase
     {
-        private FilmeDao _filmeDao;
+        private IFilmeDao _filmeDao;
 
-        public FilmeController(FilmeDao filmeDao)
+        public FilmeController(IFilmeDao filmeDao)
         {
             _filmeDao = filmeDao;
         }

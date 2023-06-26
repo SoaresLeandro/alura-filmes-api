@@ -8,9 +8,9 @@ namespace FilmesAPI.Controllers
     [ApiController, Route("{Controller}")]
     public class SessaoController : ControllerBase
     {
-        private SessaoDao _sessaoDao;
+        private ISessaoDao _sessaoDao;
 
-        public SessaoController(SessaoDao sessaoDao)
+        public SessaoController(ISessaoDao sessaoDao)
         {
             _sessaoDao = sessaoDao;
         }
