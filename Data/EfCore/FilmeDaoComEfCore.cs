@@ -16,13 +16,13 @@ namespace FilmesAPI.Data.EfCore
             _mapper = mapper;
         }
 
-        public Filme ObterFilmePorId(int id) =>
+        public Filme ObterPorId(int id) =>
             _context.Filmes.FirstOrDefault(filme => filme.Id == id);
 
         public ReadFilmeDto ObterFilmeDtoPorId(int id) =>
             _mapper.Map<ReadFilmeDto>(_context.Filmes.FirstOrDefault(f => f.Id == id));
 
-        public IEnumerable<Filme> ListarFilmes() => _context.Filmes.ToList();
+        public IEnumerable<Filme> Listar() => _context.Filmes.ToList();
 
         public IEnumerable<ReadFilmeDto> ObterFilmesDto(int skip = 0, int take = 0, string? nomeDoCinema = null)
         {
@@ -54,7 +54,7 @@ namespace FilmesAPI.Data.EfCore
             _context.SaveChanges();
         }
 
-        public void RemoverFilme(Filme filme)
+        public void Excluir(Filme filme)
         {
             _context.Remove(filme);
             _context.SaveChanges();

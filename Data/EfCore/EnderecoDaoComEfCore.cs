@@ -19,13 +19,13 @@ namespace FilmesAPI.Data.EfCore
         public ReadEnderecoDto ObterEnderecoDtoPorId(int id) =>
             _mapper.Map<ReadEnderecoDto>(_context.Enderecos.FirstOrDefault(endereco => endereco.Id == id));
 
-        public Endereco ObterEnderecoPorId(int id) =>
+        public Endereco ObterPorId(int id) =>
             _context.Enderecos.FirstOrDefault(endereco => endereco.Id == id);
 
         public IEnumerable<ReadEnderecoDto> ObterEnderecosDto(int skip = 0, int take = 0) =>
             _mapper.Map<IEnumerable<ReadEnderecoDto>>(_context.Enderecos.Skip(skip).Take(take).ToList());
 
-        public IEnumerable<Endereco> ObterEnderecos() =>
+        public IEnumerable<Endereco> Listar() =>
             _context.Enderecos.ToList();
 
         public Endereco AdicionarEndereco(CreateEnderecoDto enderecoDto)
@@ -46,7 +46,7 @@ namespace FilmesAPI.Data.EfCore
             _context.SaveChanges();
         }
 
-        public void RemoverEndereco(Endereco endereco)
+        public void Excluir(Endereco endereco)
         {
             _context.Enderecos.Remove(endereco);
             _context.SaveChanges();

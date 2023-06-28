@@ -19,7 +19,7 @@ namespace FilmesAPI.Data.EfCore
         public ReadCinemaDto ObterCinemaDtoPorId(int id) =>
             _mapper.Map<ReadCinemaDto>(_context.Cinemas.FirstOrDefault(cinema => cinema.Id == id));
 
-        public Cinema ObterCinemaPorId(int id) =>
+        public Cinema ObterPorId(int id) =>
             _context.Cinemas.FirstOrDefault(cinema => cinema.Id == id);
 
         public IEnumerable<ReadCinemaDto> ObterCinemasDto(int skip = 0, int take = 0, int? enderecoId = 0)
@@ -30,10 +30,10 @@ namespace FilmesAPI.Data.EfCore
                 _mapper.Map<IEnumerable<ReadCinemaDto>>(_context.Cinemas.Skip(skip).Take(take).ToList());
         }
 
-        public IEnumerable<Cinema> ObterCinemas() =>
+        public IEnumerable<Cinema> Listar() =>
             _context.Cinemas.ToList();
 
-        public Cinema AdicionarCinema(CreateCinemaDto cinemaDto)
+        public Cinema IncluirCinemaDto(CreateCinemaDto cinemaDto)
         {
             Cinema cinema = _mapper.Map<Cinema>(cinemaDto);
 
@@ -43,7 +43,7 @@ namespace FilmesAPI.Data.EfCore
             return cinema;
         }
 
-        public void AtualizarCinema(UpdateCinemaDto cinemaDto, Cinema cinema)
+        public void AlterarCinemaDto(UpdateCinemaDto cinemaDto, Cinema cinema)
         {
             _mapper.Map(cinemaDto, cinema);
 
@@ -51,7 +51,7 @@ namespace FilmesAPI.Data.EfCore
             _context.SaveChanges();
         }
 
-        public void RemoverCinema(Cinema cinema)
+        public void Excluir(Cinema cinema)
         {
             _context.Cinemas.Remove(cinema);
             _context.SaveChanges();

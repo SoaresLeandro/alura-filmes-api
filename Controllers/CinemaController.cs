@@ -18,7 +18,7 @@ namespace FilmesAPI.Controllers
         [HttpPost]
         public IActionResult AdicionaCinema([FromBody] CreateCinemaDto cinemaDto)
         {
-            Cinema cinema = _cinemaDao.AdicionarCinema(cinemaDto);
+            Cinema cinema = _cinemaDao.IncluirCinemaDto(cinemaDto);
 
             return CreatedAtAction(nameof(RecuperarCinemaPorId), new { id = cinema.Id }, cinema);
         }
@@ -40,11 +40,11 @@ namespace FilmesAPI.Controllers
         [HttpPut("{id}")]
         public IActionResult AtualizarCinema(int id, UpdateCinemaDto cinemaDto)
         {
-            Cinema cinema = _cinemaDao.ObterCinemaPorId(id);
+            Cinema cinema = _cinemaDao.ObterPorId(id);
 
             if(cinema is null) return NotFound();
 
-            _cinemaDao.AtualizarCinema(cinemaDto, cinema);
+            _cinemaDao.AlterarCinemaDto(cinemaDto, cinema);
 
             return NoContent();
         }
@@ -52,11 +52,11 @@ namespace FilmesAPI.Controllers
         [HttpDelete("{id}")]
         public IActionResult DeletarCinema(int id)
         {
-            Cinema cinema = _cinemaDao.ObterCinemaPorId(id);
+            Cinema cinema = _cinemaDao.ObterPorId(id);
 
             if(cinema is null) return NotFound();
 
-            _cinemaDao.RemoverCinema(cinema);
+            _cinemaDao.Excluir(cinema);
 
             return NoContent();
         }

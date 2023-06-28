@@ -41,7 +41,7 @@ namespace FilmesAPI.Controllers
         [HttpPut("{id}")]
         public IActionResult AtualizarEndereco([FromBody] UpdateEnderecoDto enderecoDto, int id)
         {
-            Endereco endereco = _enderecoDao.ObterEnderecoPorId(id);
+            Endereco endereco = _enderecoDao.ObterPorId(id);
 
             if(endereco is null) return NotFound();
 
@@ -53,11 +53,11 @@ namespace FilmesAPI.Controllers
         [HttpDelete("{id}")]
         public IActionResult ExcluirEndereco(int id)
         {
-            Endereco endereco = _enderecoDao.ObterEnderecoPorId(id);
+            Endereco endereco = _enderecoDao.ObterPorId(id);
 
             if(endereco is null) return NotFound();
 
-            _enderecoDao.RemoverEndereco(endereco);
+            _enderecoDao.Excluir(endereco);
 
             return NoContent();
         }

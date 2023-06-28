@@ -50,7 +50,7 @@ namespace FilmesAPI.Controllers
         [HttpPut("{id}")]
         public IActionResult AtualizaFilme([FromBody] UpdateFilmeDto filmeDto, int id)
         {
-            Filme filme = _filmeDao.ObterFilmePorId(id);
+            Filme filme = _filmeDao.ObterPorId(id);
 
             if(filme is null) return NotFound();
 
@@ -62,11 +62,11 @@ namespace FilmesAPI.Controllers
         [HttpDelete("{id}")]
         public IActionResult DeletaFilme(int id)
         {
-            Filme filme = _filmeDao.ObterFilmePorId(id);
+            Filme filme = _filmeDao.ObterPorId(id);
 
             if(filme is null) return NotFound();
 
-            _filmeDao.RemoverFilme(filme);
+            _filmeDao.Excluir(filme);
 
             return NoContent();
         }
